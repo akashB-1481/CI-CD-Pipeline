@@ -1,0 +1,37 @@
+name: Deploy NGINX
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup kubectl
+      uses: azure/setup-kubectl@v4
+
+    - name: Configure kubeconfig
+      run: |
+        mkdir -p ~/.kube
+        echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > ~/.kube/config
+
+    - name: Deploy Namespace
+      run: kubectl apply -f k8s/00-cicd-namespace.yaml
+
+    - name: Deploy NGINX
+      run: |
+        kubectl apply -f k8s/01-cicd-deployment.yaml
+        kubectl apply -f k8s/02-cicd-configmap.yaml
+
+    - name: Verify Deployment
+      run: |
+        kubectl rollout status deployment/nginx-deployment -n ci-cd
+        kubectl get pods -n ci-cd

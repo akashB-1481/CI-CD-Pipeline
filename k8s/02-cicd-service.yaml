@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-cicd-service
+  namespace: cicd
+spec:
+  selector:
+    app: nginx-cicd-service
+  type: ClusterIP
+
+  ports:
+    - name: nginx-cicd-service
+      protocol: TCP
+      port: 80
+      targetPort: 80
