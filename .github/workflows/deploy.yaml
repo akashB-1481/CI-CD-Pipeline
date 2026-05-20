@@ -33,5 +33,5 @@ jobs:
 
     - name: Verify Deployment
       run: |
-        kubectl rollout status deployment/nginx-deployment -n ci-cd
-        kubectl get pods -n ci-cd
+        kubectl rollout status deployment/nginx-deployment -n cicd
+        kubectl get pods -n cicd
