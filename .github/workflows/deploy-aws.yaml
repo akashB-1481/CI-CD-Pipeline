@@ -40,7 +40,9 @@ jobs:
       - name: Create Namespace
         run: |
           kubectl apply -f k8s/00-cicd-namespace.yaml
-
+      - name: Deploy configmap
+        run: |
+          kubectl apply -f k8s/03-cicd-configmap.yaml
       - name: Deploy NGINX
         run: |
           kubectl apply -f k8s/01-cicd-deployment.yaml
