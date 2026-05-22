@@ -51,12 +51,13 @@ spec:
           ports:
             - containerPort: 80
               name: nginx-cicd
-          volumes:
+
+          volumeMounts:
             - name: nginx-cm
-              configMap:
-                name: nginx-cm
-              mountPath: /var/www/html/
+              mountPath: /usr/share/nginx/html/index.html
               subPath: index.html
-      volumeMounts:
+
+      volumes:
         - name: nginx-cm
-          mountPath: /var/www/html/
+          configMap:
+            name: nginx-cm
