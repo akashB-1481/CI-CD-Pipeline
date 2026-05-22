@@ -5,7 +5,7 @@ metadata:
   namespace: cicd
 spec:
   selector:
-    app: nginx-cicd-service
+    app: nginx-cicd
   type: ClusterIP
 
   ports:
