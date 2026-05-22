@@ -55,5 +55,8 @@ spec:
             - name: nginx-cm
               configMap:
                 name: nginx-cm
-              mountPath: /var/www/html
+              mountPath: /var/www/html/
               subPath: index.html
+      volumeMounts:
+        - name: nginx-cm
+          mountPath: /var/www/html/
